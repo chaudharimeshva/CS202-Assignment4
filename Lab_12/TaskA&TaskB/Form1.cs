@@ -6,15 +6,10 @@ namespace EventPlayground
 {
     public partial class Form1 : Form
     {
-        // ---------------------------------------------
         //  CUSTOM DELEGATES USING CUSTOM EVENTARGS
-        // ---------------------------------------------
         public delegate void ColorChangedHandler(object sender, ColorEventArgs e);
-        public delegate void TextChangedHandler(string newText);
 
-        // ---------------------------------------------
         //  CUSTOM EVENTS
-        // ---------------------------------------------
         public event ColorChangedHandler ColorChangedEvent;
         public event TextChangedHandler TextChangedEvent;
 
@@ -35,10 +30,8 @@ namespace EventPlayground
             // Subscriber for Text Event
             TextChangedEvent += OnTextChanged;
         }
-
-        // ----------------------------------------------------
         // Subscriber Method 1 ? Update Label Color
-        // ----------------------------------------------------
+
         private void UpdateLabelColor(object sender, ColorEventArgs e)
         {
             Color selected = Color.Black;
@@ -50,25 +43,19 @@ namespace EventPlayground
             lblDisplay.ForeColor = selected;
         }
 
-        // ----------------------------------------------------
         // Subscriber Method 2 ? Show Notification
-        // ----------------------------------------------------
         private void ShowNotification(object sender, ColorEventArgs e)
         {
             MessageBox.Show("Selected Color: " + e.ColorName);
         }
 
-        // ----------------------------------------------------
         // Text Changed Subscriber
-        // ----------------------------------------------------
         private void OnTextChanged(string newText)
         {
             lblDisplay.Text = newText;
         }
 
-        // ----------------------------------------------------
         // Button ? Fires ColorChangedEvent
-        // ----------------------------------------------------
         private void btnChangeColor_Click(object sender, EventArgs e)
         {
             string selectedColor = comboBoxColors.SelectedItem.ToString();
@@ -77,9 +64,7 @@ namespace EventPlayground
             ColorChangedEvent?.Invoke(this, new ColorEventArgs(selectedColor));
         }
 
-        // ----------------------------------------------------
         // Button ? Fires TextChangedEvent
-        // ----------------------------------------------------
         private void btnChangeText_Click(object sender, EventArgs e)
         {
             string time = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
@@ -88,9 +73,7 @@ namespace EventPlayground
         }
     }
 
-    // ================================================================
-    //                CUSTOM EVENTARGS CLASS
-    // ================================================================
+    //CUSTOM EVENTARGS CLASS
     public class ColorEventArgs : EventArgs
     {
         public string ColorName { get; }
@@ -101,3 +84,4 @@ namespace EventPlayground
         }
     }
 }
+
